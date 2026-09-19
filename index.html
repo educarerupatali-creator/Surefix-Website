@@ -872,7 +872,7 @@
     document.head.appendChild(identityScript);
 
     const cmsScript = document.createElement('script');
-    cmsScript.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+    cmsScript.src = 'https://unpkg.com/decap-cms@3.0.0/dist/decap-cms.js';
     cmsScript.onload = function () {
       window.CMS.init({ config: CMS_CONFIG });
     };
