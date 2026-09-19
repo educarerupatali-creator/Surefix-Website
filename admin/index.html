@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SureFix Admin</title>
+
+  <script>
+    window.CMS_MANUAL_INIT = true;
+
+    window.CMS_CONFIG = {
+      backend: {
+        name: "git-gateway",
+        branch: "main"
+      },
+
+      media_folder: "content/uploads",
+      public_folder: "/content/uploads",
+
+      collections: [
+        {
+          name: "settings",
+          label: "Website Settings",
+          files: [
+            {
+              name: "settings",
+              label: "SureFix Website",
+              file: "content/settings.json",
+              fields: [
+                {
+                  label: "Hero Section",
+                  name: "hero",
+                  widget: "object",
+                  fields: [
+                    {
+                      label: "Eyebrow",
+                      name: "eyebrow",
+                      widget: "string"
+                    },
+                    {
+                      label: "Headline",
+                      name: "headline",
+                      widget: "string"
+                    },
+                    {
+                      label: "Description",
+                      name: "subheadline",
+                      widget: "text"
+                    },
+                    {
+                      label: "Phone Display",
+                      name: "phone",
+                      widget: "string"
+                    },
+                    {
+                      label: "Phone Number",
+                      name: "phone_tel",
+                      widget: "string"
+                    },
+                    {
+                      label: "WhatsApp Number",
+                      name: "whatsapp_number",
+                      widget: "string"
+                    },
+                    {
+                      label: "WhatsApp Message",
+                      name: "whatsapp_message",
+                      widget: "text"
+                    }
+                  ]
+                },
+
+                {
+                  label: "Trust Badges",
+                  name: "trust_badges",
+                  widget: "list",
+                  field:
+                    {
+                      label: "Badge",
+                      name: "badge",
+                      widget: "string"
+                    }
+                },
+
+                {
+                  label: "Services",
+                  name: "services",
+                  widget: "list",
+                  fields: [
+                    {
+                      label: "Title",
+                      name: "title",
+                      widget: "string"
+                    },
+                    {
+                      label: "Description",
+                      name: "description",
+                      widget: "text"
+                    }
+                  ]
+                },
+
+                {
+                  label: "Statistics",
+                  name: "stats",
+                  widget: "list",
+                  fields: [
+                    {
+                      label: "Value",
+                      name: "value",
+                      widget: "string"
+                    },
+                    {
+                      label: "Label",
+                      name: "label",
+                      widget: "string"
+                    }
+                  ]
+                },
+
+                {
+                  label: "Pricing",
+                  name: "pricing",
+                  widget: "list",
+                  fields: [
+                    {
+                      label: "Service",
+                      name: "service",
+                      widget: "string"
+                    },
+                    {
+                      label: "Price",
+                      name: "price",
+                      widget: "string"
+                    },
+                    {
+                      label: "Description",
+                      name: "description",
+                      widget: "text",
+                      required: false
+                    }
+                  ]
+                },
+
+                {
+                  label: "Footer / Company",
+                  name: "footer",
+                  widget: "object",
+                  fields: [
+                    {
+                      label: "Company Name",
+                      name: "company",
+                      widget: "string"
+                    },
+                    {
+                      label: "Address",
+                      name: "address",
+                      widget: "text"
+                    },
+                    {
+                      label: "UEN",
+                      name: "uen",
+                      widget: "string"
+                    },
+                    {
+                      label: "Opening Hours",
+                      name: "hours",
+                      widget: "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+  </script>
+
+  <script src="https://unpkg.com/decap-cms@3.0.0/dist/decap-cms.js"></script>
+</head>
+
+<body>
+  <div id="nc-root"></div>
+
+  <script>
+    window.CMS.init({
+      config: window.CMS_CONFIG
+    });
+  </script>
+</body>
+</html>
