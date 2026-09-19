@@ -1,0 +1,59 @@
+{
+  "hero": {
+    "eyebrow": "Islandwide \u00b7 PUB Licensed \u00b7 Since 2011",
+    "headline": "Your pipes act up. We show up.",
+    "subheadline": "SureFix sends a licensed plumber to your HDB or condo the same day \u2014 upfront SGD pricing, no callout surprises, no waiting till next week.",
+    "phone_display": "+65 8123 4567",
+    "phone_tel": "+6581234567",
+    "whatsapp_number": "6581234567",
+    "whatsapp_message": "Hi SureFix, I need a plumber. My issue is:"
+  },
+  "trust_badges": [
+    { "icon": "fa-solid fa-certificate", "label": "PUB Licensed Plumbers" },
+    { "icon": "fa-solid fa-sack-dollar", "label": "100% Transparent SGD Pricing" },
+    { "icon": "fa-solid fa-building", "label": "HDB &amp; Condo Specialist" },
+    { "icon": "fa-solid fa-bolt", "label": "Islandwide Fast Response" }
+  ],
+  "services": [
+    {
+      "icon": "fa-solid fa-water",
+      "title": "Choked Pipes &amp; Drains",
+      "description": "Kitchen sinks, floor traps and toilet bowls cleared with proper drain machines \u2014 not just a plunger and hope."
+    },
+    {
+      "icon": "fa-solid fa-droplet",
+      "title": "Water Leakage",
+      "description": "Ceiling seepage, pipe joint leaks and reno-related leaks traced to source, not just patched over."
+    },
+    {
+      "icon": "fa-solid fa-toilet",
+      "title": "Toilet &amp; Tap Repair",
+      "description": "Cistern replacements, flush valve fixes, dripping taps and mixer installs for any HDB or condo bathroom."
+    },
+    {
+      "icon": "fa-solid fa-temperature-three-quarters",
+      "title": "Water Heater Service",
+      "description": "Storage and instant heater installs, element replacement, and no-hot-water diagnosis and repair."
+    }
+  ],
+  "stats": [
+    { "icon": "fa-solid fa-screwdriver-wrench", "number": 5000, "suffix": "+", "label": "Jobs Completed" },
+    { "icon": "fa-solid fa-calendar-check", "number": 15, "suffix": "+", "label": "Years on the Job" },
+    { "icon": "fa-solid fa-stopwatch", "number": 45, "suffix": " min", "label": "Avg. Response Time" },
+    { "icon": "fa-solid fa-star", "number": 4.9, "suffix": "/5", "label": "Average Rating" }
+  ],
+  "pricing": [
+    { "service": "Choked toilet bowl / floor trap", "price": "$60 \u2013 $120", "unit": "per visit", "highlight": true },
+    { "service": "Kitchen sink unchoke", "price": "$70 \u2013 $150", "unit": "per visit" },
+    { "service": "Tap / mixer replacement", "price": "$80 \u2013 $180", "unit": "incl. standard parts" },
+    { "service": "Toilet cistern repair", "price": "$60 \u2013 $130", "unit": "per unit" },
+    { "service": "Pipe leak repair", "price": "$100 \u2013 $250", "unit": "depends on access" },
+    { "service": "Storage water heater install", "price": "$220 \u2013 $380", "unit": "excl. heater unit" }
+  ],
+  "footer": {
+    "company_name": "SureFix Plumbing &amp; Handyman Pte Ltd",
+    "address": "Islandwide service \u2014 based in Singapore",
+    "uen": "UEN 2011XXXXXW",
+    "hours": "Emergency callout available 24/7. Non-urgent bookings: 9am \u2013 9pm daily."
+  }
+}

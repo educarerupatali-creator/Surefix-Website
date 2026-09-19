@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SureFix Plumbing &amp; Handyman | 24/7 Islandwide Singapore</title>
+<meta name="description" content="PUB-licensed plumbers and handymen for HDB &amp; condo homes across Singapore. Choked pipes, water leaks, toilet and tap repairs, water heater servicing. Call or WhatsApp for a same-day quote.">
+
+<!-- ================= FONTS ================= -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+<!-- ================= TAILWIND ================= -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- ================= FONTAWESOME ================= -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- ================= GSAP ================= -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink:      '#0E1626',
+          ink2:     '#16213A',
+          ink3:     '#1F2D4D',
+          pipe:     '#3A4A6B',
+          amber:    '#FF6A2E',
+          amberdk:  '#E5541A',
+          water:    '#00B6A9',
+          waterdk:  '#049488',
+          paper:    '#F4F6F8',
+          slate:    '#5B6472',
+        },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'sans-serif'],
+          body: ['"Inter"', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace'],
+        },
+        boxShadow: {
+          'amber-glow': '0 0 0 1px rgba(255,106,46,0.35), 0 12px 32px -8px rgba(255,106,46,0.45)',
+          'card': '0 1px 2px rgba(14,22,38,0.06), 0 12px 28px -12px rgba(14,22,38,0.18)',
+          'card-hover': '0 1px 2px rgba(14,22,38,0.08), 0 24px 48px -16px rgba(0,182,169,0.28)',
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: #F4F6F8; color: #16213A; }
+  h1,h2,h3,h4, .display { font-family: 'Space Grotesk', sans-serif; }
+  .mono-tag { font-family: 'JetBrains Mono', monospace; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  }
+
+  :focus-visible { outline: 2px solid #00B6A9; outline-offset: 3px; }
+
+  /* pipe-line background motif for hero */
+  .pipe-grid {
+    background-image:
+      linear-gradient(rgba(58,74,107,0.35) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(58,74,107,0.35) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  .radial-fade {
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 20%, black 40%, transparent 100%);
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 20%, black 40%, transparent 100%);
+  }
+
+  .glow-btn {
+    position: relative;
+    animation: glowPulse 2.6s ease-in-out infinite;
+  }
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,106,46,0.55), 0 10px 26px -8px rgba(255,106,46,0.55); }
+    50%      { box-shadow: 0 0 0 10px rgba(255,106,46,0), 0 10px 26px -8px rgba(255,106,46,0.7); }
+  }
+
+  .service-card { transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .35s ease; }
+  .service-card:hover { transform: translateY(-6px); border-color: rgba(0,182,169,0.55); }
+
+  .split-word { display: inline-block; overflow: hidden; }
+  .split-word span { display: inline-block; will-change: transform; }
+
+  .wrench-divider path { vector-effect: non-scaling-stroke; }
+
+  table.pricing tbody tr:nth-child(even) { background: #F0F3F5; }
+
+  ::selection { background: #00B6A9; color: #fff; }
+
+  /* mobile sticky bar spacing helper */
+  @media (max-width: 767px) {
+    body { padding-bottom: 64px; }
+  }
+
+  /* ---------- eye-catching upgrades ---------- */
+
+  .grad-text {
+    background: linear-gradient(90deg, #FF6A2E 0%, #FFB020 55%, #FF6A2E 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradShift 6s ease-in-out infinite;
+  }
+  @keyframes gradShift {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+  }
+
+  .aurora { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .aurora span {
+    position: absolute; border-radius: 999px; filter: blur(70px);
+    animation: drift 14s ease-in-out infinite;
+  }
+  .aurora span:nth-child(1) { width: 480px; height: 480px; top: -160px; right: -140px; background: radial-gradient(circle, rgba(255,106,46,0.28), transparent 70%); animation-delay: 0s; }
+  .aurora span:nth-child(2) { width: 420px; height: 420px; bottom: -180px; left: -120px; background: radial-gradient(circle, rgba(0,182,169,0.24), transparent 70%); animation-delay: -5s; }
+  .aurora span:nth-child(3) { width: 300px; height: 300px; top: 30%; left: 40%; background: radial-gradient(circle, rgba(255,176,32,0.16), transparent 70%); animation-delay: -9s; }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%      { transform: translate(30px, -25px) scale(1.08); }
+    66%      { transform: translate(-20px, 20px) scale(0.96); }
+  }
+
+  .float-icon { animation: floaty 4.5s ease-in-out infinite; }
+  .float-icon.delay-1 { animation-delay: -1.2s; }
+  .float-icon.delay-2 { animation-delay: -2.6s; }
+  @keyframes floaty {
+    0%, 100% { transform: translateY(0) rotate(-4deg); }
+    50%      { transform: translateY(-14px) rotate(4deg); }
+  }
+
+  .eyebrow-pill { position: relative; display: inline-flex; align-items: center; gap: .55rem; }
+  .live-dot { position: relative; width: 8px; height: 8px; border-radius: 999px; background: #00E0CE; }
+  .live-dot::after {
+    content: ''; position: absolute; inset: -4px; border-radius: 999px; background: #00E0CE;
+    animation: dotPing 1.8s cubic-bezier(0,0,.2,1) infinite;
+  }
+  @keyframes dotPing {
+    0%   { transform: scale(0.6); opacity: 0.7; }
+    75%, 100% { transform: scale(2.2); opacity: 0; }
+  }
+
+  /* shimmer sweep on primary buttons */
+  .shimmer { position: relative; overflow: hidden; isolation: isolate; }
+  .shimmer::before {
+    content: ''; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+    background: linear-gradient(115deg, transparent, rgba(255,255,255,0.55), transparent);
+    transform: skewX(-18deg); transition: left .7s ease; z-index: 1;
+  }
+  .shimmer:hover::before { left: 130%; }
+
+  /* trust badge marquee */
+  .marquee-track { display: flex; width: max-content; animation: marquee 26s linear infinite; }
+  .marquee-track:hover { animation-play-state: paused; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .service-card {
+    position: relative;
+    transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s ease, border-color .4s ease;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, #00B6A9, #FF6A2E);
+    transform: scaleX(0); transform-origin: left; transition: transform .4s ease;
+  }
+  .service-card:hover { transform: translateY(-8px); border-color: rgba(0,182,169,0.5); box-shadow: 0 1px 2px rgba(14,22,38,0.08), 0 28px 48px -16px rgba(0,182,169,0.32); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card .svc-icon-wrap { transition: transform .4s cubic-bezier(.3,1.6,.5,1); }
+  .service-card:hover .svc-icon-wrap { transform: scale(1.12) rotate(-6deg); }
+
+  .stat-card { position: relative; border-radius: 14px; transition: transform .35s ease, background .35s ease; }
+  .stat-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.04); }
+
+  .price-hot { position: relative; }
+  .price-hot td:first-child { border-left: 3px solid #FF6A2E; }
+
+  .stats-grid-bg {
+    background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 26px 26px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .aurora span, .float-icon, .live-dot::after, .marquee-track, .grad-text { animation: none !important; }
+  }
+</style>
+</head>
+
+<body class="bg-paper text-ink antialiased">
+
+<!-- =========================================================
+     SITE DATA (editable defaults — overwritten at runtime by
+     content/settings.json if present, which is what the /admin
+     CMS dashboard writes to). This lets a non-technical owner
+     update numbers, prices and copy without touching this file.
+     ========================================================= -->
+<script id="site-data" type="application/json">
+{
+  "hero": {
+    "eyebrow": "Islandwide \u00b7 PUB Licensed \u00b7 Since 2011",
+    "headline": "Your pipes act up. We show up.",
+    "subheadline": "SureFix sends a licensed plumber to your HDB or condo the same day \u2014 upfront SGD pricing, no callout surprises, no waiting till next week.",
+    "phone_display": "+65 8123 4567",
+    "phone_tel": "+6581234567",
+    "whatsapp_number": "6581234567",
+    "whatsapp_message": "Hi SureFix, I need a plumber. My issue is:"
+  },
+  "trust_badges": [
+    { "icon": "fa-solid fa-certificate", "label": "PUB Licensed Plumbers" },
+    { "icon": "fa-solid fa-sack-dollar", "label": "100% Transparent SGD Pricing" },
+    { "icon": "fa-solid fa-building", "label": "HDB &amp; Condo Specialist" },
+    { "icon": "fa-solid fa-bolt", "label": "Islandwide Fast Response" }
+  ],
+  "services": [
+    {
+      "icon": "fa-solid fa-water",
+      "title": "Choked Pipes &amp; Drains",
+      "description": "Kitchen sinks, floor traps and toilet bowls cleared with proper drain machines \u2014 not just a plunger and hope."
+    },
+    {
+      "icon": "fa-solid fa-droplet",
+      "title": "Water Leakage",
+      "description": "Ceiling seepage, pipe joint leaks and reno-related leaks traced to source, not just patched over."
+    },
+    {
+      "icon": "fa-solid fa-toilet",
+      "title": "Toilet &amp; Tap Repair",
+      "description": "Cistern replacements, flush valve fixes, dripping taps and mixer installs for any HDB or condo bathroom."
+    },
+    {
+      "icon": "fa-solid fa-temperature-three-quarters",
+      "title": "Water Heater Service",
+      "description": "Storage and instant heater installs, element replacement, and no-hot-water diagnosis and repair."
+    }
+  ],
+  "stats": [
+    { "icon": "fa-solid fa-screwdriver-wrench", "number": 5000, "suffix": "+", "label": "Jobs Completed" },
+    { "icon": "fa-solid fa-calendar-check", "number": 15, "suffix": "+", "label": "Years on the Job" },
+    { "icon": "fa-solid fa-stopwatch", "number": 45, "suffix": " min", "label": "Avg. Response Time" },
+    { "icon": "fa-solid fa-star", "number": 4.9, "suffix": "/5", "label": "Average Rating" }
+  ],
+  "pricing": [
+    { "service": "Choked toilet bowl / floor trap", "price": "$60 \u2013 $120", "unit": "per visit", "highlight": true },
+    { "service": "Kitchen sink unchoke", "price": "$70 \u2013 $150", "unit": "per visit" },
+    { "service": "Tap / mixer replacement", "price": "$80 \u2013 $180", "unit": "incl. standard parts" },
+    { "service": "Toilet cistern repair", "price": "$60 \u2013 $130", "unit": "per unit" },
+    { "service": "Pipe leak repair", "price": "$100 \u2013 $250", "unit": "depends on access" },
+    { "service": "Storage water heater install", "price": "$220 \u2013 $380", "unit": "excl. heater unit" }
+  ],
+  "footer": {
+    "company_name": "SureFix Plumbing &amp; Handyman Pte Ltd",
+    "address": "Islandwide service \u2014 based in Singapore",
+    "uen": "UEN 2011XXXXXW",
+    "hours": "Emergency callout available 24/7. Non-urgent bookings: 9am \u2013 9pm daily."
+  }
+}
+</script>
+
+<!-- =========================================================
+     STICKY MOBILE CONTACT BAR
+     ========================================================= -->
+<div id="mobileBar" class="md:hidden fixed bottom-0 inset-x-0 z-40 grid grid-cols-2 bg-ink border-t border-ink3">
+  <a id="mobileCall" href="tel:+6581234567" class="flex items-center justify-center gap-2 py-3.5 text-white font-semibold border-r border-ink3 active:bg-ink3">
+    <i class="fa-solid fa-phone"></i> Call Now
+  </a>
+  <a id="mobileWhatsapp" href="https://wa.me/6581234567" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 py-3.5 text-white font-semibold bg-water active:bg-waterdk">
+    <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp
+  </a>
+</div>
+
+<!-- =========================================================
+     NAV
+     ========================================================= -->
+<header class="sticky top-0 z-30 bg-ink/95 backdrop-blur border-b border-ink3">
+  <div class="max-w-6xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2 text-white display font-semibold text-lg tracking-tight">
+      <span class="w-8 h-8 rounded-md bg-amber flex items-center justify-center">
+        <i class="fa-solid fa-wrench text-ink text-sm"></i>
+      </span>
+      SureFix
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-sm text-white/75">
+      <a href="#services" class="hover:text-white transition-colors">Services</a>
+      <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
+      <a href="#stats" class="hover:text-white transition-colors">Track Record</a>
+      <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+    </nav>
+    <a id="navCall" href="tel:+6581234567" class="hidden md:inline-flex items-center gap-2 bg-amber hover:bg-amberdk text-ink font-semibold text-sm px-4 py-2 rounded-md transition-colors">
+      <i class="fa-solid fa-phone"></i> <span id="navPhone">+65 8123 4567</span>
+    </a>
+  </div>
+</header>
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+<section id="top" class="relative bg-ink overflow-hidden">
+  <div class="aurora"><span></span><span></span><span></span></div>
+  <div class="absolute inset-0 pipe-grid radial-fade opacity-50"></div>
+
+  <!-- floating trade icons (decorative) -->
+  <i class="fa-solid fa-wrench float-icon absolute text-water/20 text-5xl top-24 right-[8%] hidden sm:block" aria-hidden="true"></i>
+  <i class="fa-solid fa-droplet float-icon delay-1 absolute text-amber/25 text-3xl top-16 left-[6%] hidden sm:block" aria-hidden="true"></i>
+  <i class="fa-solid fa-gear float-icon delay-2 absolute text-water/15 text-4xl bottom-10 right-[22%] hidden md:block" aria-hidden="true"></i>
+
+  <div class="relative max-w-6xl mx-auto px-5 md:px-8 pt-16 pb-20 md:pt-24 md:pb-28">
+    <p id="heroEyebrow" class="eyebrow-pill mono-tag text-water text-xs md:text-sm tracking-wide mb-6 opacity-0 bg-white/5 border border-water/25 rounded-full px-4 py-2 w-fit">
+      <span class="live-dot"></span>
+      <span>Islandwide &middot; PUB Licensed &middot; Since 2011</span>
+    </p>
+
+    <h1 class="display text-white font-semibold text-[2.6rem] leading-[1.08] md:text-7xl md:leading-[1.02] max-w-3xl">
+      <span class="block overflow-hidden"><span id="heroLine1" class="block translate-y-full">Your pipes act up.</span></span>
+      <span class="block overflow-hidden"><span id="heroLine2" class="grad-text block translate-y-full">We show up.</span></span>
+    </h1>
+
+    <p id="heroSub" class="mt-6 text-white/70 text-base md:text-lg max-w-xl leading-relaxed opacity-0 translate-y-3">
+      SureFix sends a licensed plumber to your HDB or condo the same day &mdash; upfront SGD pricing, no callout surprises, no waiting till next week.
+    </p>
+
+    <div id="heroCtas" class="mt-9 flex flex-wrap gap-4 opacity-0 translate-y-3">
+      <a id="ctaCall" href="tel:+6581234567" class="shimmer glow-btn inline-flex items-center gap-2 bg-amber text-ink font-semibold px-6 py-3.5 rounded-lg hover:bg-amberdk transition-colors">
+        <i class="fa-solid fa-phone"></i> Call 24/7
+      </a>
+      <a id="ctaWhatsapp" href="https://wa.me/6581234567" target="_blank" rel="noopener" class="shimmer inline-flex items-center gap-2 bg-white/5 border border-white/25 text-white font-semibold px-6 py-3.5 rounded-lg hover:bg-white/10 hover:border-water/50 transition-colors">
+        <i class="fa-brands fa-whatsapp text-lg text-water"></i> WhatsApp Us
+      </a>
+    </div>
+
+    <p class="mt-6 text-white/40 text-xs md:text-sm">No obligation quote &middot; Most jobs completed within a single visit</p>
+  </div>
+
+  <!-- trust badge marquee -->
+  <div class="relative border-t border-ink3 bg-ink2/60 py-5 overflow-hidden">
+    <div class="marquee-track" id="trustBadges">
+      <!-- injected: two duplicate sets for a seamless loop -->
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SERVICES
+     ========================================================= -->
+<section id="services" class="relative max-w-6xl mx-auto px-5 md:px-8 py-20 md:py-28">
+  <div class="max-w-2xl">
+    <p class="mono-tag text-water text-xs tracking-widest uppercase mb-3">Our Services</p>
+    <h2 class="display text-3xl md:text-[2.6rem] font-semibold leading-tight text-ink2">What we fix, most often, this week</h2>
+    <p class="mt-4 text-slate leading-relaxed">Four calls make up the bulk of what comes through our line. If yours isn't listed, it's still probably a five-minute phone call away from a straight answer.</p>
+  </div>
+
+  <div id="servicesGrid" class="mt-12 grid sm:grid-cols-2 gap-5">
+    <!-- injected -->
+  </div>
+</section>
+
+<!-- =========================================================
+     WHY SUREFIX / CREDENTIALS
+     ========================================================= -->
+<section id="why-us" class="bg-white border-y border-ink3/10">
+  <div class="max-w-6xl mx-auto px-5 md:px-8 py-16 md:py-20">
+    <div class="max-w-2xl">
+      <p class="mono-tag text-water text-xs tracking-widest uppercase mb-3">Why SureFix</p>
+      <h2 class="display text-3xl md:text-[2.6rem] font-semibold leading-tight text-ink2">Run like a proper trade business, not a one-man hustle</h2>
+    </div>
+    <div class="mt-10 grid md:grid-cols-3 gap-6">
+      <div class="p-6 rounded-xl border border-ink3/10 bg-paper">
+        <i class="fa-solid fa-file-shield text-water text-2xl"></i>
+        <h3 class="display font-semibold text-ink2 mt-4">Licensed &amp; Insured</h3>
+        <p class="mt-2 text-sm text-slate leading-relaxed">Every plumber on the job holds a valid PUB licence, and every visit is covered by public liability insurance.</p>
+      </div>
+      <div class="p-6 rounded-xl border border-ink3/10 bg-paper">
+        <i class="fa-solid fa-receipt text-water text-2xl"></i>
+        <h3 class="display font-semibold text-ink2 mt-4">Quote Before We Start</h3>
+        <p class="mt-2 text-sm text-slate leading-relaxed">You get a firm SGD price before any tool comes out of the bag &mdash; and it's the price you pay, full stop.</p>
+      </div>
+      <div class="p-6 rounded-xl border border-ink3/10 bg-paper">
+        <i class="fa-solid fa-shield-heart text-water text-2xl"></i>
+        <h3 class="display font-semibold text-ink2 mt-4">90-Day Workmanship Warranty</h3>
+        <p class="mt-2 text-sm text-slate leading-relaxed">If the same issue comes back within 90 days of a repair, we return and make it right at no extra charge.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     STATS
+     ========================================================= -->
+<section id="stats" class="relative bg-ink2 stats-grid-bg overflow-hidden">
+  <div class="absolute -top-32 left-1/3 w-[380px] h-[380px] rounded-full bg-water/10 blur-3xl"></div>
+  <div class="relative max-w-6xl mx-auto px-5 md:px-8 py-16 md:py-20">
+    <p class="mono-tag text-water text-xs tracking-widest uppercase mb-3 text-center md:text-left">Track Record</p>
+    <div id="statsGrid" class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+      <!-- injected -->
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     PRICING
+     ========================================================= -->
+<section id="pricing" class="max-w-6xl mx-auto px-5 md:px-8 py-20 md:py-28">
+  <div class="max-w-2xl">
+    <p class="mono-tag text-water text-xs tracking-widest uppercase mb-3">Pricing</p>
+    <h2 class="display text-3xl md:text-[2.6rem] font-semibold leading-tight text-ink2">Straight rates, before anyone steps into your unit</h2>
+    <p class="mt-4 text-slate leading-relaxed">These are the ranges we quote most days. Final price depends on parts and access &mdash; you'll always hear the number before work starts, not after.</p>
+  </div>
+
+  <div class="mt-12 overflow-x-auto rounded-xl border border-ink3/10 shadow-card">
+    <table class="pricing w-full text-left border-collapse">
+      <thead>
+        <tr class="bg-ink text-white">
+          <th class="py-4 px-5 font-medium text-sm"><i class="fa-solid fa-wrench mr-2 text-water"></i>Service</th>
+          <th class="py-4 px-5 font-medium text-sm">Estimated Price (SGD)</th>
+          <th class="py-4 px-5 font-medium text-sm hidden sm:table-cell">Notes</th>
+        </tr>
+      </thead>
+      <tbody id="pricingBody" class="text-sm">
+        <!-- injected -->
+      </tbody>
+    </table>
+  </div>
+  <p class="mt-4 text-xs text-slate">Prices exclude GST and major parts unless stated. Weekend and public holiday callouts carry a surcharge, quoted upfront.</p>
+</section>
+
+<!-- =========================================================
+     CONTACT / CTA
+     ========================================================= -->
+<section id="contact" class="relative bg-ink overflow-hidden">
+  <div class="aurora"><span></span><span></span><span></span></div>
+  <div class="absolute inset-0 pipe-grid radial-fade opacity-30"></div>
+  <div class="relative max-w-4xl mx-auto px-5 md:px-8 py-20 md:py-24">
+    <div class="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur px-6 py-12 md:px-14 md:py-16 text-center shadow-2xl">
+      <p class="mono-tag text-water text-xs tracking-widest uppercase mb-4">Get Help Now</p>
+      <h2 class="display text-white text-3xl md:text-[2.6rem] font-semibold leading-tight max-w-2xl mx-auto">
+        Something's leaking, dripping, or just not draining?
+      </h2>
+      <p class="mt-4 text-white/60 max-w-xl mx-auto">Tell us what's wrong on WhatsApp and we'll give you a straight estimate before we head over &mdash; or call now for anything urgent.</p>
+
+      <div class="mt-9 flex flex-wrap justify-center gap-4">
+        <a id="contactCall" href="tel:+6581234567" class="shimmer glow-btn inline-flex items-center gap-2 bg-amber text-ink font-semibold px-7 py-3.5 rounded-lg hover:bg-amberdk transition-colors">
+          <i class="fa-solid fa-phone"></i> <span id="contactPhone">+65 8123 4567</span>
+        </a>
+        <a id="contactWhatsapp" href="https://wa.me/6581234567" target="_blank" rel="noopener" class="shimmer inline-flex items-center gap-2 bg-water text-ink font-semibold px-7 py-3.5 rounded-lg hover:bg-waterdk transition-colors">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Message on WhatsApp
+        </a>
+      </div>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-white/40">
+        <span><i class="fa-solid fa-check text-water mr-1"></i> No obligation</span>
+        <span><i class="fa-solid fa-check text-water mr-1"></i> Response within 45 min</span>
+        <span><i class="fa-solid fa-check text-water mr-1"></i> Fixed SGD quote upfront</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+<footer class="bg-ink border-t border-ink3">
+  <div class="max-w-6xl mx-auto px-5 md:px-8 py-14 grid md:grid-cols-4 gap-10">
+    <div class="md:col-span-2">
+      <a href="#top" class="flex items-center gap-2 text-white display font-semibold text-lg">
+        <span class="w-8 h-8 rounded-md bg-amber flex items-center justify-center">
+          <i class="fa-solid fa-wrench text-ink text-sm"></i>
+        </span>
+        SureFix
+      </a>
+      <p id="footerCompany" class="text-white/70 text-sm mt-4 max-w-xs leading-relaxed">SureFix Plumbing &amp; Handyman Pte Ltd</p>
+      <p id="footerHours" class="text-white/40 text-xs mt-3 max-w-xs leading-relaxed">Emergency callout available 24/7. Non-urgent bookings: 9am &ndash; 9pm daily.</p>
+      <div class="flex items-center gap-3 mt-5">
+        <a href="#" aria-label="Facebook" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-water hover:border-water/50 transition-colors"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+        <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-water hover:border-water/50 transition-colors"><i class="fa-brands fa-instagram text-sm"></i></a>
+        <a href="#" aria-label="Google reviews" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-water hover:border-water/50 transition-colors"><i class="fa-brands fa-google text-sm"></i></a>
+      </div>
+    </div>
+
+    <div>
+      <p class="mono-tag text-white/40 text-xs uppercase tracking-widest mb-4">Navigate</p>
+      <nav class="flex flex-col gap-2.5 text-sm text-white/60">
+        <a href="#services" class="hover:text-white transition-colors">Services</a>
+        <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
+        <a href="#stats" class="hover:text-white transition-colors">Track Record</a>
+        <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+      </nav>
+    </div>
+
+    <div>
+      <p class="mono-tag text-white/40 text-xs uppercase tracking-widest mb-4">Credentials</p>
+      <ul class="flex flex-col gap-2.5 text-sm text-white/60">
+        <li><i class="fa-solid fa-certificate text-water mr-2"></i>PUB Licensed</li>
+        <li><i class="fa-solid fa-shield-halved text-water mr-2"></i>Public Liability Insured</li>
+        <li><i class="fa-solid fa-building-columns text-water mr-2"></i><span id="footerUen">UEN 2011XXXXXW</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-ink3">
+    <div class="max-w-6xl mx-auto px-5 md:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-white/30">
+      <p>&copy; <span id="footerYear"></span> SureFix Plumbing &amp; Handyman. All rights reserved.</p>
+      <p>Islandwide Singapore &middot; HDB &amp; Condo Specialist</p>
+    </div>
+  </div>
+</footer>
+
+<!-- =========================================================
+     TEMPLATES (used by JS to render dynamic sections)
+     ========================================================= -->
+<template id="tmpl-badge">
+  <div class="flex items-center gap-3 px-8 shrink-0">
+    <i class="badge-icon text-water text-xl w-6 text-center"></i>
+    <span class="badge-label text-white/80 text-sm leading-snug whitespace-nowrap"></span>
+    <span class="text-ink3 ml-8">&bull;</span>
+  </div>
+</template>
+
+<template id="tmpl-service">
+  <div class="service-card group bg-white border border-ink3/10 rounded-xl p-6 shadow-card">
+    <div class="w-11 h-11 rounded-lg bg-water/10 flex items-center justify-center mb-5 group-hover:bg-amber/15 transition-colors">
+      <i class="svc-icon text-water group-hover:text-amber text-lg transition-colors"></i>
+    </div>
+    <h3 class="svc-title display font-semibold text-lg text-ink2"></h3>
+    <p class="svc-desc mt-2 text-sm text-slate leading-relaxed"></p>
+  </div>
+</template>
+
+<template id="tmpl-stat">
+  <div class="stat-card text-center md:text-left p-4 md:p-5">
+    <i class="stat-icon text-water text-xl mb-3 block"></i>
+    <p class="stat-number display text-3xl md:text-4xl font-semibold text-amber" data-target="0" data-suffix="">0</p>
+    <p class="stat-label mt-1 text-white/60 text-xs md:text-sm"></p>
+  </div>
+</template>
+
+<template id="tmpl-price-row">
+  <tr class="price-row border-t border-ink3/10">
+    <td class="py-3.5 px-5 font-medium text-ink2 price-service"></td>
+    <td class="py-3.5 px-5 text-ink2 price-value"></td>
+    <td class="py-3.5 px-5 text-slate hidden sm:table-cell price-unit"></td>
+  </tr>
+</template>
+
+<!-- =========================================================
+     SITE RENDER + ANIMATION LOGIC
+     ========================================================= -->
+<script>
+(function () {
+  const DEFAULTS = JSON.parse(document.getElementById('site-data').textContent);
+
+  function digitsToPhoneHref(tel) { return 'tel:' + tel.replace(/[^\d+]/g, ''); }
+  function waHref(number, message) {
+    return 'https://wa.me/' + number.replace(/[^\d]/g, '') + (message ? ('?text=' + encodeURIComponent(message)) : '');
+  }
+
+  function renderBadges(list) {
+    const wrap = document.getElementById('trustBadges');
+    const tmpl = document.getElementById('tmpl-badge');
+    wrap.innerHTML = '';
+    // render the list twice back-to-back so the CSS marquee (which
+    // translates by -50%) loops seamlessly with no visible seam
+    for (let pass = 0; pass < 2; pass++) {
+      list.forEach(b => {
+        const node = tmpl.content.cloneNode(true);
+        node.querySelector('.badge-icon').className = 'badge-icon text-water text-xl w-6 text-center ' + b.icon;
+        node.querySelector('.badge-label').innerHTML = b.label;
+        wrap.appendChild(node);
+      });
+    }
+  }
+
+  function renderServices(list) {
+    const wrap = document.getElementById('servicesGrid');
+    const tmpl = document.getElementById('tmpl-service');
+    wrap.innerHTML = '';
+    list.forEach(s => {
+      const node = tmpl.content.cloneNode(true);
+      node.querySelector('.svc-icon').className = 'svc-icon text-water group-hover:text-amber text-lg transition-colors ' + s.icon;
+      node.querySelector('.svc-title').innerHTML = s.title;
+      node.querySelector('.svc-desc').innerHTML = s.description;
+      wrap.appendChild(node);
+    });
+  }
+
+  function renderStats(list) {
+    const wrap = document.getElementById('statsGrid');
+    const tmpl = document.getElementById('tmpl-stat');
+    wrap.innerHTML = '';
+    list.forEach(s => {
+      const node = tmpl.content.cloneNode(true);
+      const numEl = node.querySelector('.stat-number');
+      numEl.dataset.target = s.number;
+      numEl.dataset.suffix = s.suffix || '';
+      numEl.textContent = '0' + (s.suffix || '');
+      node.querySelector('.stat-icon').className = 'stat-icon text-water text-xl mb-3 block ' + (s.icon || 'fa-solid fa-chart-line');
+      node.querySelector('.stat-label').textContent = s.label;
+      wrap.appendChild(node);
+    });
+  }
+
+  function renderPricing(list) {
+    const body = document.getElementById('pricingBody');
+    const tmpl = document.getElementById('tmpl-price-row');
+    body.innerHTML = '';
+    list.forEach(r => {
+      const node = tmpl.content.cloneNode(true);
+      if (r.highlight) {
+        node.querySelector('.price-row').classList.add('price-hot');
+        const badge = document.createElement('span');
+        badge.className = 'ml-2 inline-block align-middle text-[10px] font-semibold uppercase tracking-wide bg-amber/15 text-amberdk px-2 py-0.5 rounded-full';
+        badge.textContent = 'Most booked';
+        const serviceCell = node.querySelector('.price-service');
+        serviceCell.textContent = r.service;
+        serviceCell.appendChild(badge);
+      } else {
+        node.querySelector('.price-service').textContent = r.service;
+      }
+      node.querySelector('.price-value').textContent = r.price;
+      node.querySelector('.price-unit').textContent = r.unit || '';
+      body.appendChild(node);
+    });
+  }
+
+  function applyContact(hero, footer) {
+    const telHref = digitsToPhoneHref(hero.phone_tel || hero.phone_display);
+    const waLink = waHref(hero.whatsapp_number, hero.whatsapp_message);
+
+    document.getElementById('heroEyebrow').innerHTML = hero.eyebrow;
+    document.getElementById('heroLine1').textContent = hero.headline.split('. ')[0] + (hero.headline.includes('. ') ? '.' : '');
+    const parts = hero.headline.split('. ');
+    if (parts.length > 1) document.getElementById('heroLine2').textContent = parts.slice(1).join('. ');
+    document.getElementById('heroSub').textContent = hero.subheadline;
+
+    ['ctaCall', 'navCall', 'mobileCall', 'contactCall'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.href = telHref;
+    });
+    ['ctaWhatsapp', 'mobileWhatsapp', 'contactWhatsapp'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.href = waLink;
+    });
+    ['navPhone', 'contactPhone'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = hero.phone_display;
+    });
+
+    if (footer) {
+      document.getElementById('footerCompany').innerHTML = footer.company_name;
+      document.getElementById('footerHours').textContent = footer.hours;
+      document.getElementById('footerUen').textContent = footer.uen;
+    }
+    const yearEl = document.getElementById('footerYear');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  }
+
+  function renderAll(data) {
+    renderBadges(data.trust_badges || []);
+    renderServices(data.services || []);
+    renderStats(data.stats || []);
+    renderPricing(data.pricing || []);
+    applyContact(data.hero, data.footer);
+    document.title = (data.hero && data.hero.headline ? data.hero.headline + ' | ' : '') + (data.footer ? data.footer.company_name.replace(/&amp;/g,'&') : 'SureFix Plumbing');
+    initAnimations();
+  }
+
+  function initAnimations() {
+    // Hero text reveal (single orchestrated load sequence)
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    tl.to('#heroEyebrow', { opacity: 1, duration: 0.5 })
+      .to('#heroLine1', { y: 0, duration: 0.7 }, '-=0.2')
+      .to('#heroLine2', { y: 0, duration: 0.7 }, '-=0.5')
+      .to('#heroSub', { opacity: 1, y: 0, duration: 0.6 }, '-=0.35')
+      .to('#heroCtas', { opacity: 1, y: 0, duration: 0.6 }, '-=0.4');
+
+    if (window.ScrollTrigger) {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // service cards: gentle staggered entrance on scroll
+      gsap.from('#servicesGrid .service-card', {
+        scrollTrigger: { trigger: '#servicesGrid', start: 'top 82%' },
+        y: 28, opacity: 0, duration: 0.6, stagger: 0.12, ease: 'power2.out'
+      });
+
+      // pricing table rows
+      gsap.from('#pricingBody tr', {
+        scrollTrigger: { trigger: '#pricingBody', start: 'top 85%' },
+        opacity: 0, x: -16, duration: 0.5, stagger: 0.08, ease: 'power2.out'
+      });
+
+      // "why SureFix" credential cards
+      gsap.utils.toArray('#why-us .grid > div').forEach((card, i) => {
+        gsap.from(card, {
+          scrollTrigger: { trigger: card, start: 'top 88%' },
+          y: 24, opacity: 0, duration: 0.55, delay: i * 0.08, ease: 'power2.out'
+        });
+      });
+
+      // animated counters
+      document.querySelectorAll('.stat-number').forEach(el => {
+        const target = parseFloat(el.dataset.target);
+        const suffix = el.dataset.suffix || '';
+        const isDecimal = target % 1 !== 0;
+        const counter = { val: 0 };
+        ScrollTrigger.create({
+          trigger: '#stats',
+          start: 'top 75%',
+          once: true,
+          onEnter: () => {
+            gsap.to(counter, {
+              val: target,
+              duration: 1.8,
+              ease: 'power2.out',
+              onUpdate: () => {
+                el.textContent = (isDecimal ? counter.val.toFixed(1) : Math.round(counter.val)) + suffix;
+              }
+            });
+          }
+        });
+      });
+    }
+  }
+
+  async function loadContent() {
+    try {
+      const res = await fetch('content/settings.json', { cache: 'no-store' });
+      if (res.ok) {
+        const data = await res.json();
+        renderAll(Object.assign({}, DEFAULTS, data));
+        return;
+      }
+    } catch (e) {
+      // no content file yet (first run, or opened as a local file) — fall back to defaults below
+    }
+    renderAll(DEFAULTS);
+  }
+
+  document.addEventListener('DOMContentLoaded', loadContent);
+})();
+</script>
+
+<!-- =========================================================
+     DECAP CMS (NETLIFY CMS) — INLINE ADMIN
+     The dashboard only loads when this file is opened at a path
+     containing /admin (e.g. yoursite.com/admin/ or this file
+     saved as /admin/index.html), or with ?admin=1 for local
+     testing. Editors publish through it; SureFix's own commits
+     go straight to content/settings.json, which the public page
+     above fetches at runtime — no rebuild needed to see edits.
+
+     TO GO LIVE:
+     1. Push this file to a Git repo (GitHub/GitLab/Bitbucket) and
+        deploy it on Netlify (or any static host + Netlify Identity
+        + Git Gateway).
+     2. Enable Identity + Git Gateway in the Netlify dashboard for
+        that site, and invite the site owner as a user.
+     3. Update the "repo" value below to "your-org/your-repo".
+     4. Visit yoursite.com/admin to log in and edit.
+     ========================================================= -->
+<script>
+  const IS_ADMIN_VIEW = window.location.pathname.includes('/admin') || new URLSearchParams(window.location.search).get('admin') === '1';
+
+  if (IS_ADMIN_VIEW) {
+    document.body.innerHTML = '<div id="nc-root"></div>';
+    document.title = 'SureFix — Content Dashboard';
+
+    const CMS_CONFIG = {
+      backend: {
+        name: 'git-gateway',
+        branch: 'main'
+        // For a direct GitHub backend instead of Netlify Identity, replace the
+        // block above with:
+        // name: 'github', repo: 'your-org/your-repo', branch: 'main'
+        //
+        // HOSTING THIS SITE OUTSIDE NETLIFY (e.g. your own cPanel/VPS hosting)?
+        // git-gateway still works — it just needs a Netlify site somewhere to
+        // handle login. Create a free, separate "shell" Netlify site from the
+        // same GitHub repo, enable Identity + Git Gateway on THAT shell site
+        // only (you don't need to actually serve your real site from it), then
+        // uncomment the line below with that shell site's URL:
+        // base_url: 'https://your-shell-site-name.netlify.app'
+      },
+      local_backend: false,
+      media_folder: 'content/uploads',
+      public_folder: '/content/uploads',
+      publish_mode: 'simple',
+      display_url: window.location.origin,
+      collections: [
+        {
+          name: 'settings',
+          label: 'Site Content',
+          files: [
+            {
+              name: 'general',
+              label: 'Homepage Content',
+              file: 'content/settings.json',
+              fields: [
+                {
+                  label: 'Hero Section', name: 'hero', widget: 'object',
+                  fields: [
+                    { label: 'Eyebrow line', name: 'eyebrow', widget: 'string' },
+                    { label: 'Headline', name: 'headline', widget: 'string', hint: 'Keep it to one short sentence, e.g. "Your pipes act up. We show up."' },
+                    { label: 'Subheadline', name: 'subheadline', widget: 'text' },
+                    { label: 'Phone (display)', name: 'phone_display', widget: 'string' },
+                    { label: 'Phone (for tel: link)', name: 'phone_tel', widget: 'string' },
+                    { label: 'WhatsApp number (digits, with country code)', name: 'whatsapp_number', widget: 'string' },
+                    { label: 'WhatsApp pre-filled message', name: 'whatsapp_message', widget: 'string', required: false }
+                  ]
+                },
+                {
+                  label: 'Trust Badges', name: 'trust_badges', widget: 'list',
+                  fields: [
+                    { label: 'Icon (Font Awesome class)', name: 'icon', widget: 'string', hint: 'e.g. fa-solid fa-certificate' },
+                    { label: 'Label', name: 'label', widget: 'string' }
+                  ]
+                },
+                {
+                  label: 'Services', name: 'services', widget: 'list',
+                  fields: [
+                    { label: 'Icon (Font Awesome class)', name: 'icon', widget: 'string' },
+                    { label: 'Title', name: 'title', widget: 'string' },
+                    { label: 'Description', name: 'description', widget: 'text' }
+                  ]
+                },
+                {
+                  label: 'Stats Counter', name: 'stats', widget: 'list',
+                  fields: [
+                    { label: 'Icon (Font Awesome class)', name: 'icon', widget: 'string', required: false, hint: 'e.g. fa-solid fa-star' },
+                    { label: 'Number', name: 'number', widget: 'number' },
+                    { label: 'Suffix', name: 'suffix', widget: 'string', required: false, hint: 'e.g. "+", "/5", " min"' },
+                    { label: 'Label', name: 'label', widget: 'string' }
+                  ]
+                },
+                {
+                  label: 'Pricing Matrix', name: 'pricing', widget: 'list',
+                  fields: [
+                    { label: 'Service', name: 'service', widget: 'string' },
+                    { label: 'Price (SGD)', name: 'price', widget: 'string' },
+                    { label: 'Unit / notes', name: 'unit', widget: 'string', required: false },
+                    { label: 'Highlight as "Most booked"', name: 'highlight', widget: 'boolean', required: false, default: false }
+                  ]
+                },
+                {
+                  label: 'Footer', name: 'footer', widget: 'object',
+                  fields: [
+                    { label: 'Company name', name: 'company_name', widget: 'string' },
+                    { label: 'Address / area', name: 'address', widget: 'string', required: false },
+                    { label: 'UEN', name: 'uen', widget: 'string' },
+                    { label: 'Hours', name: 'hours', widget: 'text' }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+
+    const identityScript = document.createElement('script');
+    identityScript.src = 'https://identity.netlify.com/v1/netlify-identity-widget.js';
+    document.head.appendChild(identityScript);
+
+    const cmsScript = document.createElement('script');
+    cmsScript.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+    cmsScript.onload = function () {
+      window.CMS.init({ config: CMS_CONFIG });
+    };
+    document.head.appendChild(cmsScript);
+  }
+</script>
+
+</body>
+</html>
