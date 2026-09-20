@@ -870,7 +870,9 @@
     const identityScript = document.createElement('script');
     identityScript.src = 'https://identity.netlify.com/v1/netlify-identity-widget.js';
     document.head.appendChild(identityScript);
-
+if (window.location.hash.includes('_token=')) {
+  window.location.replace('/admin/' + window.location.hash);
+}
     const cmsScript = document.createElement('script');
     cmsScript.src = 'https://unpkg.com/decap-cms@3.0.0/dist/decap-cms.js';
     cmsScript.onload = function () {
