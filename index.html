@@ -870,7 +870,12 @@
     const identityScript = document.createElement('script');
     identityScript.src = 'https://identity.netlify.com/v1/netlify-identity-widget.js';
     document.head.appendChild(identityScript);
-if (window.location.hash.includes('_token=')) {
+if (
+  window.location.hash.includes('recovery_token=') ||
+  window.location.hash.includes('invite_token=') ||
+  window.location.hash.includes('confirmation_token=') ||
+  window.location.hash.includes('email_change_token=')
+) {
   window.location.replace('/admin/' + window.location.hash);
 }
     const cmsScript = document.createElement('script');
